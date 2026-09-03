@@ -9,43 +9,95 @@
     :root {
       --bg: #0d1117;
       --fg: #e6edf3;
-      --muted: #8b949e;
-      --accent: #58a6ff;
-      --card: #161b22;
-      --border: #30363d;
+      --muted: #9aa4b2;
+      --accent: #79b8ff;
+      --accent-strong: #58a6ff;
+      --card: #131820;
+      --card-hover: #161d27;
+      --border: #21262d;
+      --border-hover: #388bfd66;
+      --mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background: var(--bg); color: var(--fg);
+      background:
+        radial-gradient(1000px 480px at 50% -12%, #16233a 0%, rgba(22, 35, 58, 0) 62%),
+        radial-gradient(760px 420px at 92% 4%, #1a1f36 0%, rgba(26, 31, 54, 0) 55%),
+        var(--bg);
+      color: var(--fg);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
-      line-height: 1.6; padding: 3rem 1.5rem 5rem;
+      line-height: 1.65; padding: 3.5rem 1.5rem 5rem;
+      -webkit-font-smoothing: antialiased;
     }
-    .wrap { max-width: 920px; margin: 0 auto; }
-    header { text-align: center; margin-bottom: 3rem; }
-    h1 { font-size: 2.2rem; letter-spacing: 0.02em; margin-bottom: .5rem; }
-    header p { color: var(--muted); font-size: 1.05rem; }
-    h2 { font-size: 1.15rem; color: var(--accent); margin: 2.2rem 0 1rem; }
+    ::selection { background: #1f6feb55; }
+    a:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 3.25rem; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--mono); font-size: .72rem; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+      background: #58a6ff14; border: 1px solid #58a6ff33;
+      border-radius: 999px; padding: .3rem .85rem; margin-bottom: 1.1rem;
+    }
+    .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-strong); }
+    h1 { font-size: 2.5rem; letter-spacing: -0.015em; line-height: 1.2; margin-bottom: .65rem; text-wrap: balance; }
+    header p { color: var(--muted); font-size: 1.02rem; max-width: 40em; margin: 0 auto; text-wrap: balance; }
+    header p + p { margin-top: .3rem; font-size: .95rem; opacity: .85; }
+    h2 {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: 1.08rem; font-weight: 600; color: var(--fg);
+      margin: 2.5rem 0 1.05rem;
+    }
+    h2::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
     .grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 0.9rem;
     }
     a.card {
-      display: block; text-decoration: none; color: var(--fg);
+      position: relative; display: block; text-decoration: none; color: var(--fg);
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1rem 1.1rem;
-      transition: border-color .15s ease, transform .15s ease;
+      border-radius: 12px; padding: 1.05rem 1.15rem 1rem;
+      transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
     }
-    a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card .name { font-weight: 600; margin-bottom: .25rem; }
-    .card .name code { color: var(--accent); font-size: .9rem; }
-    .card .desc { color: var(--muted); font-size: .85rem; }
-    footer { margin-top: 3.5rem; text-align: center; color: var(--muted); font-size: .85rem; }
-    footer a { color: var(--muted); }
+    a.card:hover {
+      border-color: #58a6ff59; background: var(--card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -10px rgba(0, 0, 0, .5), 0 0 0 1px #58a6ff1a;
+    }
+    .card .arrow {
+      position: absolute; top: .85rem; right: .95rem;
+      color: var(--muted); font-size: .8rem; opacity: 0;
+      transition: opacity .18s ease, color .18s ease, transform .18s ease;
+    }
+    a.card:hover .arrow { opacity: 1; color: var(--accent-strong); transform: translate(1px, -1px); }
+    .card .name { font-weight: 600; margin-bottom: .3rem; }
+    .card .name code {
+      color: var(--accent); font-size: .88rem; font-family: var(--mono);
+      letter-spacing: .01em;
+    }
+    .card .desc { color: var(--muted); font-size: .85rem; line-height: 1.6; }
+    footer {
+      margin-top: 4rem; padding-top: 1.5rem; text-align: center;
+      color: var(--muted); font-size: .85rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--muted); text-decoration: none; border-bottom: 1px solid #9aa4b244; transition: color .15s ease, border-color .15s ease; }
+    footer a:hover { color: var(--fg); border-color: var(--accent-strong); }
+    @media (max-width: 640px) {
+      h1 { font-size: 2rem; }
+      body { padding: 2.25rem 1.1rem 3.5rem; }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
+      <div class="eyebrow">Build in Public · Open Source</div>
       <h1>⚡ Build Workbench</h1>
       <p>AI-native projects, experiments, and tools built through vibe coding.</p>
       <p>用 Vibe Coding 构建的 AI 原生项目、实验与工具。</p>
@@ -56,85 +108,85 @@
       <a class="card" href="https://github.com/build-workbench/JadeAI">
         <div class="name"><code>JadeAI</code></div>
         <div class="desc">AI 驱动的简历与求职工作台</div>
-      </a>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/meta-human">
         <div class="name"><code>meta-human</code></div>
-        <div class="desc">浏览器原生 3D 数字人引擎,集成语音与对话</div>
-      </a>
+        <div class="desc">浏览器原生 3D 数字人引擎，集成语音与对话</div>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/yolo-toys">
         <div class="name"><code>yolo-toys</code></div>
-        <div class="desc">多模型视觉推理服务,统一 FastAPI 接口</div>
-      </a>
+        <div class="desc">多模型视觉推理服务，统一 FastAPI 接口</div>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/brave-sync-notes">
         <div class="name"><code>brave-sync-notes</code></div>
-        <div class="desc">端到端加密笔记同步,服务器零知识</div>
-      </a>
+        <div class="desc">端到端加密笔记同步，服务器零知识</div>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/chat-stash">
         <div class="name"><code>chat-stash</code></div>
         <div class="desc">基于大模型的聊天记录智能收纳与检索</div>
-      </a>
+      <span class="arrow">↗</span></a>
     </div>
 
-    <h2>🛠️ 浏览器效率工具(PWA / 本地优先)</h2>
+    <h2>🛠️ 浏览器效率工具（PWA / 本地优先）</h2>
     <div class="grid">
       <a class="card" href="https://github.com/build-workbench/bookmarks-manager">
         <div class="name"><code>bookmarks-manager</code></div>
         <div class="desc">数据不出浏览器的书签整理 PWA</div>
-      </a>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/bookmarks-cleaner">
         <div class="name"><code>bookmarks-cleaner</code></div>
-        <div class="desc">离线书签自动分类引擎:规则优先 · ML 辅助 · LLM 可选</div>
-      </a>
+        <div class="desc">离线书签自动分类引擎：规则优先 · ML 辅助 · LLM 可选</div>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/mind-gym">
         <div class="name"><code>mind-gym</code></div>
-        <div class="desc">浏览器端认知训练 PWA:N-back、间隔重复</div>
-      </a>
+        <div class="desc">浏览器端认知训练 PWA：N-back、间隔重复</div>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/graph-viewer">
         <div class="name"><code>graph-viewer</code></div>
-        <div class="desc">一站式图表可视化,16+ 图表引擎</div>
-      </a>
+        <div class="desc">一站式图表可视化，16+ 图表引擎</div>
+      <span class="arrow">↗</span></a>
     </div>
 
     <h2>🌐 实时通信与全栈教学</h2>
     <div class="grid">
       <a class="card" href="https://github.com/build-workbench/webrtc-call">
         <div class="name"><code>webrtc-call</code></div>
-        <div class="desc">WebRTC 通话教学:P2P 音视频(1v1 / Mesh)</div>
-      </a>
+        <div class="desc">WebRTC 通话教学：P2P 音视频(1v1 / Mesh)</div>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/webrtc-signaling">
         <div class="name"><code>webrtc-signaling</code></div>
         <div class="desc">Go WebRTC 信令服务教学</div>
-      </a>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/chatroom">
         <div class="name"><code>chatroom</code></div>
         <div class="desc">全栈教学:Go + React + PostgreSQL + WebSocket</div>
-      </a>
+      <span class="arrow">↗</span></a>
     </div>
 
     <h2>⚙️ 高性能计算与算法</h2>
     <div class="grid">
       <a class="card" href="https://github.com/build-workbench/nbody-gpu-sim">
         <div class="name"><code>nbody-gpu-sim</code></div>
-        <div class="desc">CUDA 百万粒子 N 体模拟,OpenGL 实时可视化</div>
-      </a>
+        <div class="desc">CUDA 百万粒子 N 体模拟，OpenGL 实时可视化</div>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/cudaimg">
         <div class="name"><code>cudaimg</code></div>
         <div class="desc">通过图像处理学习 CUDA 编程</div>
-      </a>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/compress-kit">
         <div class="name"><code>compress-kit</code></div>
         <div class="desc">C++17 经典无损压缩算法实现与验证</div>
-      </a>
+      <span class="arrow">↗</span></a>
       <a class="card" href="https://github.com/build-workbench/utop">
         <div class="name"><code>utop</code></div>
-        <div class="desc">Rust 教学向终端进程监视器(htop 实现)</div>
-      </a>
+        <div class="desc">Rust 教学向终端进程监视器（htop 实现）</div>
+      <span class="arrow">↗</span></a>
     </div>
 
     <footer>
-      <a href="https://github.com/build-workbench">GitHub 组织主页</a> ·
-      <a href="https://github.com/build-workbench/.github/blob/main/CONTRIBUTING.md">参与贡献</a> ·
-      <a href="https://github.com/build-workbench/.github/blob/main/CODE_OF_CONDUCT.md">行为准则</a>
+      <a href="https://github.com/build-workbench">GitHub 组织主页<span class="arrow">↗</span></a> ·
+      <a href="https://github.com/build-workbench/.github/blob/main/CONTRIBUTING.md">参与贡献<span class="arrow">↗</span></a> ·
+      <a href="https://github.com/build-workbench/.github/blob/main/CODE_OF_CONDUCT.md">行为准则<span class="arrow">↗</span></a>
       <p style="margin-top:.5rem">MIT License · build-workbench © 2026</p>
     </footer>
   </div>
