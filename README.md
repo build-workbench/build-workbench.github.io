@@ -1,5 +1,26 @@
 # build-workbench.github.io
 
+The Build Workbench organization portal site. A static single page, hosted by GitHub Pages at <https://build-workbench.github.io>.
+
+## Local Preview
+
+```bash
+python3 -m http.server 8000
+```
+
+Then visit <http://localhost:8000>.
+
+## Maintenance
+
+- After adding/renaming projects, update the cards in `index.html` accordingly.
+- Project introductions and categories are governed by `.github/profile/README.md`; keep the two consistent.
+
+---
+
+<a id="chinese"></a>
+
+# build-workbench.github.io
+
 Build Workbench 组织门户站点。静态单页,由 GitHub Pages 托管于 <https://build-workbench.github.io>。
 
 ## 本地预览
