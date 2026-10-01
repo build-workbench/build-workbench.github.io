@@ -1,3 +1,7 @@
+**English** | [中文](#chinese)
+
+<a id="top"></a>
+
 # build-workbench.github.io
 
 The Build Workbench organization portal site. A static single page, hosted by GitHub Pages at <https://build-workbench.github.io>.
@@ -18,6 +22,7 @@ Then visit <http://localhost:8000>.
 ---
 
 <a id="chinese"></a>
+[English](#top) | **中文**
 
 # build-workbench.github.io
 
